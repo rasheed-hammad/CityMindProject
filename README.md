@@ -19,7 +19,7 @@
 ## Table of Contents
 
 - [Overview](#overview)
-- [Demo](#demo)
+
 - [Key Features](#key-features)
 - [Tech Stack](#tech-stack)
 - [Installation](#installation)
@@ -49,11 +49,6 @@ The simulation runs for 20 steps. Roads flood live, emergencies appear at random
 
 ---
 
-## Demo
-
-> Add `docs/demo.gif` here once recorded.
-
-```
 ![CityMind Demo](docs/demo.gif)
 ```
 
