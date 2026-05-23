@@ -108,21 +108,7 @@ No scikit-learn. Only `pygame` and `networkx` required.
 
 > **Requirements:** Python 3.10 or higher.
 
-```bash
-# 1. Clone the repository
-git clone https://github.com/<your-username>/CityMindProject.git
-cd CityMindProject
 
-# 2. Install dependencies
-pip install -r requirements.txt
-
-
-## Usage
-
-### Run the full simulation
-
-```bash
-python main.py
 ```
 
 ### Run any challenge standalone (for testing)
