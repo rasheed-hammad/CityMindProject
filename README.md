@@ -50,48 +50,72 @@ The simulation runs for 20 steps. Roads flood live, emergencies appear at random
 ---
 
 ![CityMind Demo](docs/demo.gif)
-```
-
 ---
 
 ## Key Features
 
-- **Five cooperating AI techniques** on a single shared graph (CSP, MST, GA, A\*, ML pipeline).
-- **Real-time pygame UI** with four view modes: City, Roads, Coverage, Crime.
-- **Dynamic events** — roads flood and clear, emergencies appear, ambulances reroute.
-- **End-to-end feedback loop** — crime predictions change edge costs, which change routes, which change ambulance placements.
-- **Chaos Mode** stress test for resilience.
-- **All algorithms implemented from scratch** (no scikit-learn). Only `pygame` and `networkx` required.
-- **20-step simulation** with full restart support via "Run Again".
+<table>
+<tr>
+<td width="50%" valign="top">
+
+**Five cooperating AI techniques**
+CSP, MST, GA, A\*, and an ML pipeline — all sharing one graph object.
+
+**Real-time pygame UI**
+Four view modes: City, Roads, Coverage, Crime.
+
+**Dynamic events**
+Roads flood and clear, emergencies appear, ambulances reroute on the fly.
+
+</td>
+<td width="50%" valign="top">
+
+**End-to-end feedback loop**
+Crime predictions change edge costs, which change routes, which change ambulance placements.
+
+**Chaos Mode**
+Stress-test toggle that pushes flood and emergency rates to extremes.
+
+**Built from scratch**
+No scikit-learn. Only `pygame` and `networkx` required.
+
+</td>
+</tr>
+</table>
 
 ---
 
 ## Tech Stack
 
-| Layer | Tool |
-|---|---|
-| Language | Python 3.10+ |
-| Graph | NetworkX |
-| Visualization | pygame |
-| Algorithms | All implemented from scratch |
+<p align="left">
+  <img src="https://img.shields.io/badge/Python-3.10%2B-3776AB?logo=python&logoColor=white" alt="Python"/>
+  <img src="https://img.shields.io/badge/Pygame-2.5%2B-FFD43B?logo=python&logoColor=black" alt="Pygame"/>
+  <img src="https://img.shields.io/badge/NetworkX-3.0%2B-FF6F00" alt="NetworkX"/>
+  <img src="https://img.shields.io/badge/Algorithms-From%20Scratch-brightgreen" alt="From Scratch"/>
+  <img src="https://img.shields.io/badge/Platform-Windows%20%7C%20Linux%20%7C%20macOS-blue" alt="Platform"/>
+</p>
+
+| Layer | Tool | Purpose |
+|---|---|---|
+| **Language** | Python 3.10+ | Core implementation |
+| **Graph** | NetworkX | Edge connectivity, graph utilities |
+| **Visualization** | pygame | Real-time UI and animation |
+| **Algorithms** | Custom | CSP, Kruskal, GA, A\*, K-Means, Random Forest — no ML libs |
 
 ---
 
 ## Installation
 
+> **Requirements:** Python 3.10 or higher.
+
 ```bash
+# 1. Clone the repository
 git clone https://github.com/<your-username>/CityMindProject.git
 cd CityMindProject
+
+# 2. Install dependencies
 pip install -r requirements.txt
-```
 
-If you do not have a `requirements.txt`, install directly:
-
-```bash
-pip install pygame networkx
-```
-
----
 
 ## Usage
 
