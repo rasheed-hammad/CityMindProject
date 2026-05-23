@@ -19,10 +19,8 @@
 ## Table of Contents
 
 - [Overview](#overview)
-
 - [Key Features](#key-features)
 - [Tech Stack](#tech-stack)
-- [Installation](#installation)
 - [Usage](#usage)
 - [Project Structure](#project-structure)
 - [How It Works](#how-it-works)
@@ -43,13 +41,14 @@
 
 ## Overview
 
-CityMind models a 10×10 urban grid as a graph and runs five different AI techniques over the same shared structure. Each module reads from and writes to one `CityGraph` object, so a change made by one algorithm is immediately visible to every other algorithm.
+CityMind models a 10×10 urban grid as a graph and runs five different AI techniques over the same shared structure. Each module reads from and writes to one [CityGraph](cci:2://file:///d:/Semester-4/AI/CityMindProject/city_graph.py:4:0-80:83) object, so a change made by one algorithm is immediately visible to every other algorithm.
 
 The simulation runs for 20 steps. Roads flood live, emergencies appear at random residentials, ambulances dispatch and reroute around blocked roads, the genetic algorithm re-evaluates positions every 5 steps, and police officers are deployed proportionally to predicted crime risk. A **Chaos Mode** toggle stress-tests the system by sharply increasing flood and emergency rates.
 
 ---
 
 ![CityMind Demo](docs/demo.gif)
+
 ---
 
 ## Key Features
@@ -104,11 +103,12 @@ No scikit-learn. Only `pygame` and `networkx` required.
 
 ---
 
-## Installation
+## Usage
 
-> **Requirements:** Python 3.10 or higher.
+### Run the full simulation
 
-
+```bash
+python main.py
 ```
 
 ### Run any challenge standalone (for testing)
@@ -146,7 +146,6 @@ CityMindProject/
 │   └── challange5_crime.py    # K-Means + Random Forest
 ├── UI/
 │   └── renderer.py            # pygame visualization
-├── requirements.txt
 └── README.md
 ```
 
@@ -156,12 +155,12 @@ CityMindProject/
 
 When `python main.py` runs, the project executes in this order:
 
-1. **Create the empty grid** — `CityGraph(10, 10)`.
-2. **Place buildings** — `CityLayoutCSP.solve()` runs CSP backtracking with forward checking to position 31 buildings while satisfying spatial constraints.
-3. **Build roads** — `RoadNetworkBuilder.build()` constructs a Kruskal MST, adds redundancy edges so the Hospital-to-Depot link is 2-edge-connected, then patches any residential not within 3 road hops of a hospital.
+1. **Create the empty grid** — [CityGraph(10, 10)](cci:2://file:///d:/Semester-4/AI/CityMindProject/city_graph.py:4:0-80:83).
+2. **Place buildings** — [CityLayoutCSP.solve()](cci:1://file:///d:/Semester-4/AI/CityMindProject/challanges/challange1_layout.py:510:4-529:23) runs CSP backtracking with forward checking to position 31 buildings while satisfying spatial constraints.
+3. **Build roads** — [RoadNetworkBuilder.build()](cci:1://file:///d:/Semester-4/AI/CityMindProject/challanges/challange2_roads.py:225:4-235:26) constructs a Kruskal MST, adds redundancy edges so the Hospital-to-Depot link is 2-edge-connected, then patches any residential not within 3 road hops of a hospital.
 4. **Recompute accessibility** of all nodes.
-5. **Crime analysis** — `CrimePredictor` runs K-Means clustering, trains a Random Forest, writes risk indices onto nodes, multiplies edge costs by `(1 + avg_risk)`, and prepares a police deployment plan.
-6. **Place ambulances** — `AmbulancePlacement.optimize()` runs a Genetic Algorithm using A\* travel cost as fitness.
+5. **Crime analysis** — [CrimePredictor](cci:2://file:///d:/Semester-4/AI/CityMindProject/challanges/challange5_crime.py:274:0-514:33) runs K-Means clustering, trains a Random Forest, writes risk indices onto nodes, multiplies edge costs by `(1 + avg_risk)`, and prepares a police deployment plan.
+6. **Place ambulances** — [AmbulancePlacement.optimize()](cci:1://file:///d:/Semester-4/AI/CityMindProject/challanges/challange3_ambulance.py:121:4-173:29) runs a Genetic Algorithm using A\* travel cost as fitness.
 7. **Launch the simulation loop** — for each of 20 steps:
    - Flood / clear roads, generate emergencies.
    - Deploy one queued police officer.
@@ -272,7 +271,7 @@ When a police officer is deployed to a node, that node's `risk_index` drops by 4
 
 ## Simulation Engine
 
-`CitySimulation` (in `simulation.py`) is the clock and weather of the city. Each `run_step()`:
+[CitySimulation](cci:2://file:///d:/Semester-4/AI/CityMindProject/simulation.py:3:0-129:29) (in [simulation.py](cci:7://file:///d:/Semester-4/AI/CityMindProject/simulation.py:0:0-0:0)) is the clock and weather of the city. Each [run_step()](cci:1://file:///d:/Semester-4/AI/CityMindProject/simulation.py:111:4-129:29):
 
 - Possibly floods one random built road.
 - Possibly clears one currently flooded road.
@@ -280,13 +279,13 @@ When a police officer is deployed to a node, that node's `risk_index` drops by 4
 - Recomputes node accessibility from the Depot.
 - Appends events to `event_log` for the Live Events panel.
 
-`AmbulanceManager` (in `ambulance_manager.py`) handles dispatch, movement, and replanning. It runs A\* whenever a road changes and moves each ambulance pixel-by-pixel along its planned path.
+[AmbulanceManager](cci:2://file:///d:/Semester-4/AI/CityMindProject/ambulance_manager.py:5:0-149:41) (in [ambulance_manager.py](cci:7://file:///d:/Semester-4/AI/CityMindProject/ambulance_manager.py:0:0-0:0)) handles dispatch, movement, and replanning. It runs A\* whenever a road changes and moves each ambulance pixel-by-pixel along its planned path.
 
 ---
 
 ## Renderer
 
-`CityRenderer` (in `UI/renderer.py`) is a pygame visualizer. It owns the window, top bar, four view modes, particle effects (siren pulses, industrial smoke), animated flood ripples, the Live Events panel, and the completion overlay.
+[CityRenderer](cci:2://file:///d:/Semester-4/AI/CityMindProject/UI/renderer.py:228:0-1118:19) (in [UI/renderer.py](cci:7://file:///d:/Semester-4/AI/CityMindProject/UI/renderer.py:0:0-0:0)) is a pygame visualizer. It owns the window, top bar, four view modes, particle effects (siren pulses, industrial smoke), animated flood ripples, the Live Events panel, and the completion overlay.
 
 The renderer is purely a consumer of the shared graph — it never modifies state.
 
@@ -294,7 +293,7 @@ The renderer is purely a consumer of the shared graph — it never modifies stat
 
 ## What Makes It Cohesive
 
-1. **Single shared graph.** Every module passes `CityGraph` by reference. No copies, no synchronization.
+1. **Single shared graph.** Every module passes [CityGraph](cci:2://file:///d:/Semester-4/AI/CityMindProject/city_graph.py:4:0-80:83) by reference. No copies, no synchronization.
 2. **End-to-end feedback loop.** Crime prediction changes edge costs, which change routes, which change ambulance placements, which inform police deployment, which lowers crime risk.
 3. **Robust under chaos.** Each module is designed to be re-callable on the current graph state, so flooded roads, new emergencies, and shifting risk are handled gracefully — even with Chaos Mode pushing event rates to extremes.
 
