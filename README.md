@@ -297,20 +297,4 @@ The renderer is purely a consumer of the shared graph — it never modifies stat
 2. **End-to-end feedback loop.** Crime prediction changes edge costs, which change routes, which change ambulance placements, which inform police deployment, which lowers crime risk.
 3. **Robust under chaos.** Each module is designed to be re-callable on the current graph state, so flooded roads, new emergencies, and shifting risk are handled gracefully — even with Chaos Mode pushing event rates to extremes.
 
----
 
-## Team
-
-Built collaboratively at **FAST-NUCES, Section F** as a 4th-semester AI project.
-
-| Name | Roll Number |
-|---|---|
-| Muhammad Hammad Rasheed | 24i-0703 |
-| Muhammad Mesum Ali | 24i-0759 |
-| Haider Rizwan | 24i-0813 |
-
----
-
-## License
-
-This project is licensed under the MIT License — see the [LICENSE](LICENSE) file for details.
