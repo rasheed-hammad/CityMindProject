@@ -34,8 +34,7 @@
 - [Simulation Engine](#simulation-engine)
 - [Renderer](#renderer)
 - [What Makes It Cohesive](#what-makes-it-cohesive)
-- [Team](#team)
-- [License](#license)
+
 
 ---
 
